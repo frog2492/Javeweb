@@ -1,5 +1,6 @@
 package com.yxy.service;
 
+import com.yxy.pojo.Page;
 import com.yxy.pojo.Pet;
 import com.yxy.pojo.PetType;
 
@@ -15,4 +16,5 @@ public interface PetService {
     void addPet(Pet pet);
     String queryVarietiesByTypeName(String typename);
     List<Pet> queryByType(String typeId);
+    Page<Pet> queryPets(String typeid, int pageNumber);
 }

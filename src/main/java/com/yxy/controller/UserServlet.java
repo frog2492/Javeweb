@@ -136,4 +136,8 @@ public class UserServlet extends BaseServlet {
         }
     }
 
+    protected void loginOut(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        request.getSession().removeAttribute("user");
+        request.getRequestDispatcher("index.jsp").forward(request,response);
+    }
 }

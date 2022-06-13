@@ -3,7 +3,7 @@
  * 加入购物车
  */
 function buy(bid){
-	$.get("books_buy.action", {bid:bid}, function(data){
+	$.get("CartServlet?action=addPetItem", {bid:bid}, function(data){
 		if(data=="ok")
 		{
 			layer.msg("添加到购物车!", {time:800}, function(){

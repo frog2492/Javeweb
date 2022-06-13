@@ -1,9 +1,11 @@
 package com.yxy.controller;
 
+import com.yxy.pojo.Page;
 import com.yxy.pojo.Pet;
 import com.yxy.pojo.PetType;
 import com.yxy.service.PetService;
 import com.yxy.service.impl.PetServiceImpl;
+import com.yxy.utils.WebUtils;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -18,7 +20,8 @@ import java.util.List;
 public class InterfaceServlet extends BaseServlet {
     PetService petService = new PetServiceImpl();
   protected void ShowIndex(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
-      List<Pet> pets = petService.queryAll();
+      Page<Pet> page = petService.queryPets("-1", 1);
+      List<Pet> pets = page.getItems();
       List<PetType> petTypes = petService.queryAllPetTypeName();
       request.setAttribute("type", petTypes);
       request.getSession().setAttribute("petType",petTypes);
@@ -55,17 +58,22 @@ public class InterfaceServlet extends BaseServlet {
     }
     protected void ByTypeShowInfo(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
         String typeId = request.getParameter("typeId");
+        Integer pageNumber = WebUtils.parseInt(request.getParameter("pageNumber"),1);
+        request.setAttribute("type", typeId);
         if("-1".equals(typeId)){
-            List<Pet> pets = petService.queryAll();
-
-            request.setAttribute("pets",pets);
+            Page<Pet> page = petService.queryPets(typeId, pageNumber);
+            page.setUrl("InterfaceServlet?action=ByTypeShowInfo");
+            request.setAttribute("p",page);
+            List<Pet> items = page.getItems();
+            request.setAttribute("pets",items);
             request.getRequestDispatcher("pages/client/pettypes_list.jsp").forward(request,response);
 
         }else{
-            List<Pet> pets = petService.queryByType(typeId);
+            Page<Pet> page = petService.queryPets(typeId, pageNumber);
+            List<Pet> items = page.getItems();
             String s = petService.queryVarietiesByTypeId(typeId);
             request.setAttribute("t",s);
-            request.setAttribute("pets",pets);
+            request.setAttribute("pets",items);
             request.getRequestDispatcher("pages/client/pettypes_list.jsp").forward(request,response);
         }
     }

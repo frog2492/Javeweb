@@ -38,13 +38,13 @@
 
             <c:forEach items="${requestScope.pets}" var="pet">
                 <div class="product-grid">
-                    <a href="book_detail.action?bid=${pet.petId}">
+                    <a href="InterfaceServlet?action=ShowPetInfo&bid=${pet.petId}">
                         <div class="more-product"><span> </span></div>
                         <div class="product-img b-link-stripe b-animate-go  thickbox">
                             <img src="images${pet.picture}" class="img-responsive"  width="240" height="240">
                             <div class="b-wrapper">
                                 <h4 class="b-animate b-from-left  b-delay03">
-                                    <button  onclick="window.location.href='book_detail.action?bid=${pet.petId}'">查看详情</button>
+                                    <button  onclick="window.location.href='InterfaceServlet?action=ShowPetInfo&bid=${pet.petId}'">查看详情</button>
                                 </h4>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
 
                             <h4>体重: ${pet.weight}kg</h4>
                             <span class="item_price">¥ ${pet.price}</span>
-                            <input type="button" class="item_add items" value="加入购物车" onclick="buy(${pet.petId})">
+                            <a href="OrderServlet?action=showCreatOrder&pid=${pet.petId} "> <input type="button" class="item_add items" value="加入购物车" ></a>
                             <div class="clearfix"> </div>
                         </div>
                     </div>
@@ -69,10 +69,7 @@
 
         </div>
 
-<%--        <jsp:include page="../common/page.jsp">--%>
-<%--            <jsp:param name="url" value="booktypes_list.action"></jsp:param>--%>
-<%--            <jsp:param name="param" value="&btid=${btid}"></jsp:param>--%>
-<%--        </jsp:include>--%>
+        <jsp:include page="../common/page.jsp"></jsp:include>
     </div>
 </div>
 </div>

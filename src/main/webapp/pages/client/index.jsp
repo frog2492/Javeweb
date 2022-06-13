@@ -35,12 +35,12 @@
 
 <div class="banner">
     <div class="container">
-        <h2 class="hdng"><a href="book_detail.action?bid=100002">宠物猫咪</a><span></span></h2>
+        <h2 class="hdng"><a href="InterfaceServlet?action=ShowPetInfo&bid=1001}">宠物猫咪</a><span></span></h2>
         <p>今日精选推荐</p>
-        <a class="banner_a" href="javascript:;" onclick="buy(100002)">立刻查看</a>
+        <a class="banner_a" href="javascript:;" onclick="buy(${pet.petId})">立刻查看</a>
         <div class="banner-text">
             <a href="book_detail.action?bid=100002">
-                <img src="images/9787547715543_0.jpg" alt="增广贤文" width="350" height="350">
+                <img src="images/9787547715543_0.jpg" alt="" width="350" height="350">
             </a>
         </div>
     </div>
@@ -72,7 +72,7 @@
                         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         <a href="InterfaceServlet?action=ShowPetInfo&bid=${pet.petId}">查看详情</a>
                     </p>
-                    <a class="shop" href="javascript:;" onclick="buy(100005)">立刻购买</a>
+                    <a class="shop" href="OrderServlet?action=showCreatOrder&pid=${pet.petId}">立刻购买</a>
                     <div class="clearfix"> </div>
                 </div>
                 <div class="galy-info">
@@ -93,6 +93,7 @@
         </div>
     </div>
 </div>
+
 <!--//gallery-->
 <!--subscribe-->
 <div class="subscribe"></div>

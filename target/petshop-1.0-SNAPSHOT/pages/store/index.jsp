@@ -24,7 +24,7 @@
 <div class="container-fluid">
     <jsp:include page="header.jsp"></jsp:include>
     <br><br>
-    <div class="alert alert-success" role="alert">欢迎进入猫狗大师后台管理系统！</div>
+    <div class="alert alert-success" role="alert">欢迎进入猫大人后台管理系统！</div>
 </div>
 </body>
 </html>

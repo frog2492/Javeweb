@@ -69,4 +69,31 @@ public class PetDaoImplTest {
 
         System.out.println(  petDao.queryByType("pt0007"));
     }
+
+    @Test
+    public void queryPets() {
+        List<Pet> pets = petDao.queryPets(0, 4);
+        System.out.println(pets);
+    }
+
+    @Test
+    public void queryCountOfPets() {
+        int i = petDao.queryCountOfPets();
+        System.out.println(i);
+    }
+
+    @Test
+    public void queryCountByType() {
+        int i = petDao.queryCountByType("pt0007");
+        System.out.println(i);
+    }
+
+    @Test
+    public void testQueryByType() {
+        List<Pet> pt0007 = petDao.queryByType("-1", 0, 8);
+        for(Pet pet:pt0007){
+            System.out.println(pet);
+        }
+//        System.out.println(pt0007);
+    }
 }

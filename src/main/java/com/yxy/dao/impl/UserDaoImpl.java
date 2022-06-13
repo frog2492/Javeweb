@@ -13,10 +13,7 @@ public class UserDaoImpl  extends BaseDao implements UserDao{
         return update(sql,user.getUserid(),user.getUsername(),user.getUserpassword(),user.getSex(),user.getAddress(),user.getEmail(),user.getPhone());
     }
 
-    @Override
-    public int identify(String uname) {
-        return 0;
-    }
+
 
     @Override
     public void updateUserInfo(String uid, User user) {
@@ -30,10 +27,7 @@ public class UserDaoImpl  extends BaseDao implements UserDao{
     update(sql, upwd,uid);
     }
 
-    @Override
-    public int getUidByUname(String uname) {
-        return 0;
-    }
+
 
     @Override
     public User login(String uname) {
@@ -41,25 +35,6 @@ public class UserDaoImpl  extends BaseDao implements UserDao{
         return queryForOne(User.class,sql,uname);
     }
 
-    @Override
-    public String queryUpwd(int uid) {
-        return null;
-    }
-
-    @Override
-    public List<User> queryUser(int pageIndex, int pageSize) {
-        return null;
-    }
-
-    @Override
-    public int queryCountOfUser() {
-        return 0;
-    }
-
-    @Override
-    public void deleteUser(int uid) {
-
-    }
 
     @Override
     public User queryUserByUid(String uid) {

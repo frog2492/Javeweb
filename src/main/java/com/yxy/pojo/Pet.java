@@ -16,19 +16,14 @@ public class Pet {
     private BigDecimal price;
     private Integer pin;
     private String  StoreId;
-    public Pet(String petId, String sex, String type, String describe, Float weight, Date birthday, String picture, String picture1, String picture2, BigDecimal price, Integer pin, String storeId) {
-        this.petId = petId;
-        this.sex = sex;
-        this.type = type;
-        this.describe = describe;
-        this.weight = weight;
-        this.birthday = birthday;
-        this.picture = picture;
-        this.picture1 = picture1;
-        this.picture2 = picture2;
-        this.price = price;
-        this.pin = pin;
-        StoreId = storeId;
+    private Integer num;
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     @Override
@@ -46,7 +41,24 @@ public class Pet {
                 ", price=" + price +
                 ", pin=" + pin +
                 ", StoreId='" + StoreId + '\'' +
+                ", num=" + num +
                 '}';
+    }
+
+    public Pet(String petId, String sex, String type, String describe, Float weight, Date birthday, String picture, String picture1, String picture2, BigDecimal price, Integer pin, String storeId, Integer num) {
+        this.petId = petId;
+        this.sex = sex;
+        this.type = type;
+        this.describe = describe;
+        this.weight = weight;
+        this.birthday = birthday;
+        this.picture = picture;
+        this.picture1 = picture1;
+        this.picture2 = picture2;
+        this.price = price;
+        this.pin = pin;
+        StoreId = storeId;
+        this.num = num;
     }
 
     public String getPicture1() {

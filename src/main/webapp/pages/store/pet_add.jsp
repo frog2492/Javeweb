@@ -32,7 +32,7 @@
         <div class="form-group">
             <label for="input_name" class="col-sm-1 control-label">宠物编号</label>
             <div class="col-sm-6">
-                <input type="text"  class="form-control" id="inputname" name="pid" value="${pet.petId }" required="required">
+                <input type="number"  class="form-control" id="inputname" name="pid" value="${pet.petId }" required="required">
             </div>
         </div>
         <div class="form-group">

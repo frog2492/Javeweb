@@ -2,13 +2,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page isELIgnored="false" %>
 <div style='text-align:center;'>
-    <a class='btn btn-info'   <c:if test="${p.pageNumber==1 }">disabled</c:if>  <c:if test="${p.pageNumber!=1 }">href="${param.url }?pageNumber=1${param.param }"</c:if>>首页</a>
-    <a class='btn btn-info' <c:if test="${p.pageNumber==1 }">disabled</c:if> <c:if test="${p.pageNumber!=1 }">href="${param.url }?pageNumber=${p.pageNumber-1}${param.param }"</c:if>>上一页</a>
-    <h3 style='display:inline;'>[${p.pageNumber }/${p.totalPage }]</h3>
-    <h3 style='display:inline;'>[${p.totalCount }]</h3>
-    <a class='btn btn-info' <c:if test="${p.totalPage==0 || p.pageNumber==p.totalPage }">disabled</c:if> <c:if test="${p.pageNumber!=p.totalPage }">href="${param.url }?pageNumber=${p.pageNumber+1}${param.param }"</c:if>>下一页</a>
-    <a class='btn btn-info' <c:if test="${p.totalPage==0 || p.pageNumber==p.totalPage }">disabled</c:if> <c:if test="${p.pageNumber!=p.totalPage }">href="${param.url }?pageNumber=${p.totalPage}${param.param }"</c:if>>尾页</a>
-    <input type='text' class='form-control' style='display:inline;width:60px;' value=''/><a class='btn btn-info' href='javascript:void(0);' onclick='location.href="${param.url }?pageNumber="+(this.previousSibling.value)+"${param.param }"'>GO</a>
+    <a class='btn btn-info'   <c:if test="${p.pageNo==1 }">disabled</c:if>  <c:if test="${p.pageNo!=1 }">href="${p.url }&pageNumber=1&typeId=${type }"</c:if>>首页</a>
+    <a class='btn btn-info' <c:if test="${p.pageNo==1 }">disabled</c:if> <c:if test="${p.pageNo!=1 }">href="${p.url }&pageNumber=${p.pageNo-1}&typeId=${type}"</c:if>>上一页</a>
+
+    <a class='btn btn-info'style="background-color: #ddd" disable>第${p.pageNo }页</a>
+
+    <a class='btn btn-info' disable>共${p.pageTotal }页</a>
+    <a class='btn btn-info' disable>${p.pageTotalCount }条记录</a>
+    <a class='btn btn-info' <c:if test="${p.pageTotal==0 || p.pageNo==p.pageTotal }">disabled</c:if> <c:if test="${p.pageNo!=p.pageTotal }">href="${p.url }&pageNumber=${p.pageNo+1}&typeId=${requestScope.type}"</c:if>>下一页</a>
+    <a class='btn btn-info' <c:if test="${p.pageTotal==0 || p.pageNo==p.pageTotal }">disabled</c:if> <c:if test="${p.pageNo!=p.pageTotal }">href="${p.url }&pageNumber=${p.pageTotal}&typeId=${type }"</c:if>>尾页</a>
+    <input type='text' class='form-control' style='display:inline;width:60px;' value=''/><a class='btn btn-info' href='javascript:void(0);' onclick='location.href="${p.url }&pageNumber="+(this.previousSibling.value)+"&typeId=${type }"'>GO</a>
 </div>
 
 </body>

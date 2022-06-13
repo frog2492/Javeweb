@@ -46,19 +46,46 @@ public class PetDaoImpl extends BaseDao implements PetDao {
     @Override
     public void updatePetInfo(Pet pet) {
         String sql="update pet set type_id=?,`describe`=?,weight=?,birthday=?,picture=?,picture1=?,picture2=?,reference_price=? ,pin_number=? where pet_id=?";
-        update(sql,pet.getType(),pet.getDescribe(),pet.getWeight(),pet.getBirthday(),pet.getPicture(),pet.getPicture1(),pet.getPicture2(),pet.getPrice(),pet.getPin(),pet.getPetId());
+        update(sql,pet.getType(),pet.getDescribe(),pet.getWeight(),pet.getBirthday(),pet.getPicture(),pet.getPicture1(),pet.getPicture2(),pet.getPrice(),pet.getPin(),pet.getPetId(),pet.getNum());
     }
 
     @Override
     public void addPet(Pet pet) {
-        String sql="insert into pet values(?,?,?,?,?,?,?,?,?,?,?,?)";
-        update(sql,pet.getPetId(),pet.getSex(),pet.getType(),pet.getPicture(),pet.getPicture1(),pet.getDescribe(),pet.getWeight(),pet.getBirthday(),pet.getPrice(),pet.getPin(),pet.getStoreId(),pet.getPicture2());
+        String sql="insert into pet values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        update(sql,pet.getPetId(),pet.getSex(),pet.getType(),pet.getPicture(),pet.getPicture1(),pet.getDescribe(),pet.getWeight(),pet.getBirthday(),pet.getPrice(),pet.getPin(),pet.getStoreId(),pet.getPicture2(),pet.getNum());
     }
 
     @Override
     public List<Pet> queryByType(String typeId) {
         String sql = "select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId from pet where type_id=?";
         return queryForList(Pet.class, sql, typeId);
+    }
+
+    @Override
+    public List<Pet> queryPets(int pageIndex, int pageSize) {
+        String sql="select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId ,num from pet limit ?,?";
+        return queryForList(Pet.class,sql,pageIndex,pageSize);
+
+    }
+
+    @Override
+    public List<Pet> queryByType(String typeId, int pageIndex, int pageSize) {
+        String sql = "select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId ,num from pet where type_id=? limit ?,?";
+        return queryForList(Pet.class, sql, typeId,pageIndex,pageSize);
+    }
+
+    @Override
+    public int queryCountOfPets() {
+        String sql ="select count(*) from pet";
+        Number count = (Number) queryForValues(sql);
+        return count.intValue();
+    }
+
+    @Override
+    public int queryCountByType(String typeId) {
+        String sql ="select count(*) from pet where type_id=?";
+        Number count = (Number) queryForValues(sql,typeId);
+        return count.intValue();
     }
 }
 

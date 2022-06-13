@@ -1,6 +1,7 @@
 package com.yxy.service.impl;
 
 import com.sun.org.apache.bcel.internal.generic.NEW;
+import com.yxy.pojo.Page;
 import com.yxy.pojo.Pet;
 import com.yxy.service.PetService;
 import org.junit.Test;
@@ -29,5 +30,15 @@ public class PetServiceImplTest {
     public void queryVarietiesByTypeId() {
         String pt10001 = petService.queryVarietiesByTypeId("pt10001");
         System.out.println(pt10001);
+    }
+
+    @Test
+    public void queryPets() {
+        Page<Pet> page = petService.queryPets("-1", 1);
+        List<Pet> items = page.getItems();
+        for(Pet pet:items){
+            System.out.println(pet);
+        }
+//        System.out.println(items);
     }
 }

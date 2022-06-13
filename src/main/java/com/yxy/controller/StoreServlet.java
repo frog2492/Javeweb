@@ -1,10 +1,13 @@
 package com.yxy.controller;
 
 
+import com.yxy.pojo.Order;
 import com.yxy.pojo.Pet;
 import com.yxy.pojo.PetType;
+import com.yxy.service.OrderService;
 import com.yxy.service.PetService;
 import com.yxy.service.StoreService;
+import com.yxy.service.impl.OrderServiceImpl;
 import com.yxy.service.impl.PetServiceImpl;
 import com.yxy.service.impl.StoreServiceImpl;
 import com.yxy.utils.WebUtils;
@@ -21,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.math.BigDecimal;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,6 +36,7 @@ import java.util.List;
 public class StoreServlet extends BaseServlet{
     private StoreService storeService= new StoreServiceImpl();
     private PetService petService = new PetServiceImpl();
+    private OrderService orderService = new OrderServiceImpl();
     protected void  login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String account = request.getParameter("account");
         String password = request.getParameter("password");
@@ -181,6 +186,57 @@ public class StoreServlet extends BaseServlet{
         request.setAttribute("petTypes",petTypes);
         request.getRequestDispatcher("/pages/store/pet_add.jsp").forward(request,response);
     }
-}
+    protected void showOrder(HttpServletRequest request ,HttpServletResponse response) throws ServletException, IOException {
+        String ostatus = request.getParameter("ostatus");
+        if("1".equals(ostatus)){
+            List<Order> orders = orderService.queryOrder();
+            request.setAttribute("orders",orders);
+            request.getRequestDispatcher("pages/store/order_list.jsp").forward(request,response);
+        }
+        else if("2".equals(ostatus)){
+            List<Order> orders = orderService.queryOrderByOstatus("已付款");
+            request.setAttribute("orders",orders);
+            request.getRequestDispatcher("pages/store/order_list.jsp").forward(request,response);
+        }
+        else if("3".equals(ostatus)){
+            List<Order> orders = orderService.queryOrderByOstatus("运输中");
+            request.setAttribute("orders",orders);
+            request.getRequestDispatcher("pages/store/order_list.jsp").forward(request,response);
+        }
+        else if("4".equals(ostatus)){
+            List<Order> orders = orderService.queryOrderByOstatus("已完成");
+            request.setAttribute("orders",orders);
+            request.getRequestDispatcher("pages/store/order_list.jsp").forward(request,response);
+        }
+        else{
+            request.getRequestDispatcher("pages/store/order_list.jsp").forward(request,response);
+        }
+    }
+        protected void deleteOrder(HttpServletRequest request ,HttpServletResponse response) throws IOException {
+            String oid = request.getParameter("oid");
+            orderService.deleteOrder(oid);
+            response.sendRedirect(request.getContextPath()+"/StoreServlet?action=showOrder&pageNumber=1&ostatus=1");
+        }
+
+    protected void changeState(HttpServletRequest request ,HttpServletResponse response) throws IOException {
+        String oid = request.getParameter("oid");
+        String ostatus = request.getParameter("ostatus");
+        if("3".equals(ostatus)){
+            orderService.updateOrderStatus(oid,"运输中" );
+            response.sendRedirect(request.getContextPath()+"/StoreServlet?action=showOrder&pageNumber=1&ostatus=3");
+        }
+        else if("4".equals(ostatus)){
+            orderService.updateOrderStatus(oid,"已完成" );
+            response.sendRedirect(request.getContextPath()+"/StoreServlet?action=showOrder&pageNumber=1&ostatus=4");
+        }
+
+
+
+    }
+    protected void loginout(HttpServletRequest request ,HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("index.jsp").forward(request,response);
+    }
+    }
+
 
 

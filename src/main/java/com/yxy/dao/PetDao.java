@@ -21,4 +21,8 @@ public interface PetDao {
     void updatePetInfo(Pet pet);
     void addPet(Pet pet);
     List<Pet> queryByType(String typeId);
+    public List<Pet> queryPets(int pageIndex,int pageSize);             //查询全部
+    List<Pet> queryByType(String typeId,int pageIndex,int pageSize);
+    public int queryCountOfPets();
+    public int queryCountByType(String typeId);
 }
