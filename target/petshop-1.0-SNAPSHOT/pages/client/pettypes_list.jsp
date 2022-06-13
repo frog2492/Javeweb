@@ -37,6 +37,7 @@
         <div class="col-md-12 product-model-sec">
 
             <c:forEach items="${requestScope.pets}" var="pet">
+                <c:if test="${pet.num!=0}">
                 <div class="product-grid">
                     <a href="InterfaceServlet?action=ShowPetInfo&bid=${pet.petId}">
                         <div class="more-product"><span> </span></div>
@@ -52,6 +53,8 @@
                     <div class="product-info simpleCart_shelfItem">
                         <div class="product-info-cust prt_name">
                             <br>
+                            <h4>宠物编号: ${pet.petId}</h4>
+                            <br>
 
                             <h4>疫苗情况: ${pet.pin}针疫苗</h4>
                             <br>
@@ -63,6 +66,7 @@
                         </div>
                     </div>
                 </div>
+                </c:if>
             </c:forEach>
 
 

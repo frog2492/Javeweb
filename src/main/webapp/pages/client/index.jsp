@@ -61,7 +61,7 @@
         </div>
         <div class="gallery-grids">
         <c:forEach items="${requestScope.pets}" var="pet">
-
+    <c:if test="${pet.num!=0}">
             <div class="col-md-3 gallery-grid ">
 
                 <a href="InterfaceServlet?action=ShowPetInfo&bid=${pet.petId}">
@@ -76,7 +76,9 @@
                     <div class="clearfix"> </div>
                 </div>
                 <div class="galy-info">
+                    <p>宠物编号:${pet.petId}</p>
             <c:forEach items="${requestScope.type}" var="type" >
+
                 <c:if test="${type.typeId==pet.type}"> <p>品种名  >  ${type.typeName} </p></c:if>
             </c:forEach>
                     <p>体重 : ${pet.weight} Kg </p>
@@ -88,7 +90,7 @@
                     </div>
                 </div>
             </div>
-
+    </c:if>
         </c:forEach>
         </div>
     </div>

@@ -97,6 +97,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="input_name" class="col-sm-1 control-label">数量</label>
+            <div class="col-sm-6">
+                <input type="number" class="form-control" id="input_name" name="num" value="${pet.num}">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="input_name" class="col-sm-1 control-label">介绍</label>
             <div class="col-sm-6">
                 <input type="text" class="form-control" id="input_name" name="desc" value="${pet.describe}">
@@ -111,5 +117,6 @@
         </div>
     </form>
 </div>
+<jsp:include page="../common/page.jsp"></jsp:include>
 </body>
 </html>

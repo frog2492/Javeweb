@@ -15,7 +15,7 @@ public class PetDaoImpl extends BaseDao implements PetDao {
 
     @Override
     public List<Pet> queryAll() {
-        String sql="select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId from pet";
+        String sql="select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId ,num from pet";
         return queryForList(Pet.class, sql);
     }
 
@@ -45,8 +45,8 @@ public class PetDaoImpl extends BaseDao implements PetDao {
 
     @Override
     public void updatePetInfo(Pet pet) {
-        String sql="update pet set type_id=?,`describe`=?,weight=?,birthday=?,picture=?,picture1=?,picture2=?,reference_price=? ,pin_number=? where pet_id=?";
-        update(sql,pet.getType(),pet.getDescribe(),pet.getWeight(),pet.getBirthday(),pet.getPicture(),pet.getPicture1(),pet.getPicture2(),pet.getPrice(),pet.getPin(),pet.getPetId(),pet.getNum());
+        String sql="update pet set type_id=?,`describe`=?,weight=?,birthday=?,picture=?,picture1=?,picture2=?,reference_price=? ,pin_number=?,num=? where pet_id=?";
+        update(sql,pet.getType(),pet.getDescribe(),pet.getWeight(),pet.getBirthday(),pet.getPicture(),pet.getPicture1(),pet.getPicture2(),pet.getPrice(),pet.getPin(),pet.getNum(),pet.getPetId());
     }
 
     @Override
@@ -70,7 +70,7 @@ public class PetDaoImpl extends BaseDao implements PetDao {
 
     @Override
     public List<Pet> queryByType(String typeId, int pageIndex, int pageSize) {
-        String sql = "select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId ,num from pet where type_id=? limit ?,?";
+        String sql = "select pet_id petId,pet_sex sex ,type_id type,`describe`,weight,birthday,picture,picture1,picture2,reference_price price,pin_number pin,store_id storeId ,num from pet where type_id=?  limit ?,?";
         return queryForList(Pet.class, sql, typeId,pageIndex,pageSize);
     }
 

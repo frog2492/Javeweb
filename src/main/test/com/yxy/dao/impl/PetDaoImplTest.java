@@ -21,10 +21,9 @@ public class PetDaoImplTest {
     public void queryAll() {
         List<Pet> pets = petDao.queryAll();
 
-        System.out.println(pets);
+
         for(Pet item:pets){
-            String describe = item.getDescribe();
-            System.out.println(describe);
+
 
             System.out.println(item);
         }
@@ -45,7 +44,7 @@ public class PetDaoImplTest {
 
     @Test
     public void updatePetInfo() {
-        Pet pet = petDao.queryById("pet1001");
+        Pet pet = petDao.queryById("1001");
         pet.setSex("雌性");
         pet.setWeight(new Float(4.2));
         petDao.updatePetInfo(pet);

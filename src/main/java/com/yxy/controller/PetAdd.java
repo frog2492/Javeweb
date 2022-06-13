@@ -121,6 +121,7 @@ public class PetAdd extends HttpServlet {
 
 
             //保存宠物信息至数据库
+            pet.setNum(1);
             pet.setStoreId("s10001");
             petService.addPet(pet);
 

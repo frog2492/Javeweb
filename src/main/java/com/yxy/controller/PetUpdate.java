@@ -71,8 +71,11 @@ public class PetUpdate extends HttpServlet {
                         }else if("type".equalsIgnoreCase(name)){
 
                             pet.setType(value);
-                        }else if("pin".equalsIgnoreCase(name)){
+                        }else if("pin".equalsIgnoreCase(name)) {
+                            pet.setPin(WebUtils.parseInt(value, 0));
+                        }else if("num".equalsIgnoreCase(name)){
                             pet.setPin(WebUtils.parseInt(value,0));
+
                         }else if("desc".equalsIgnoreCase(name)){
                             //中文转码
                             value = new String(value.getBytes("ISO-8859-1"),"UTF-8");

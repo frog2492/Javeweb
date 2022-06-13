@@ -60,6 +60,7 @@ public class InterfaceServlet extends BaseServlet {
         String typeId = request.getParameter("typeId");
         Integer pageNumber = WebUtils.parseInt(request.getParameter("pageNumber"),1);
         request.setAttribute("type", typeId);
+
         if("-1".equals(typeId)){
             Page<Pet> page = petService.queryPets(typeId, pageNumber);
             page.setUrl("InterfaceServlet?action=ByTypeShowInfo");
@@ -71,8 +72,10 @@ public class InterfaceServlet extends BaseServlet {
         }else{
             Page<Pet> page = petService.queryPets(typeId, pageNumber);
             List<Pet> items = page.getItems();
+            page.setUrl("InterfaceServlet?action=ByTypeShowInfo");
             String s = petService.queryVarietiesByTypeId(typeId);
             request.setAttribute("t",s);
+            request.setAttribute("p",page);
             request.setAttribute("pets",items);
             request.getRequestDispatcher("pages/client/pettypes_list.jsp").forward(request,response);
         }
